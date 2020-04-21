@@ -2857,7 +2857,7 @@ void qemu_init(int argc, char **argv, char **envp)
     error_init(argv[0]);
     module_call_init(MODULE_INIT_TRACE);
 
-    qemu_init_cpu_list();
+    qemu_init_cpu_list(); ==> Init cpu list
     qemu_init_cpu_loop();
 
     qemu_mutex_lock_iothread();
@@ -2899,7 +2899,7 @@ void qemu_init(int argc, char **argv, char **envp)
     qemu_add_opts(&qemu_numa_opts);
     qemu_add_opts(&qemu_icount_opts);
     qemu_add_opts(&qemu_semihosting_config_opts);
-    qemu_add_opts(&qemu_fw_cfg_opts);
+    qemu_add_opts(&qemu_fw_cfg_opts); ==> Add options
     module_call_init(MODULE_INIT_OPTS);
 
     runstate_init();
@@ -3811,9 +3811,9 @@ void qemu_init(int argc, char **argv, char **envp)
         exit(0);
     }
 
-    user_register_global_props();
+    user_register_global_props(); ==> Register global properties
 
-    replay_configure(icount_opts);
+    replay_configure(icount_opts); ==> Replay
 
     if (incoming && !preconfig_exit_requested) {
         error_report("'preconfig' and 'incoming' options are "
@@ -3821,15 +3821,15 @@ void qemu_init(int argc, char **argv, char **envp)
         exit(EXIT_FAILURE);
     }
 
-    configure_rtc(qemu_find_opts_singleton("rtc"));
+    configure_rtc(qemu_find_opts_singleton("rtc")); ==> Configure RTC
 
-    machine_class = select_machine();
+    machine_class = select_machine(); ==> Select machine based on "type" option
     object_set_machine_compat_props(machine_class->compat_props);
 
     have_custom_ram_size = set_memory_options(&ram_slots, &maxram_size,
-                                              machine_class);
+                                              machine_class); ==> Configure maximum ram size
 
-    os_daemonize();
+    os_daemonize(); ==> Use fork to run app background
 
     /*
      * If QTest is enabled, keep the rcu_atfork enabled, since system processes
@@ -3842,7 +3842,7 @@ void qemu_init(int argc, char **argv, char **envp)
         rcu_disable_atfork();
     }
 
-    if (pid_file && !qemu_write_pidfile(pid_file, &err)) {
+    if (pid_file && !qemu_write_pidfile(pid_file, &err)) { ==> Create PID file
         error_reportf_err(err, "cannot create PID file: ");
         exit(1);
     }
@@ -3878,8 +3878,8 @@ void qemu_init(int argc, char **argv, char **envp)
         exit(0);
     }
     object_property_add_child(object_get_root(), "machine",
-                              OBJECT(current_machine), &error_abort);
-    object_property_add_child(container_get(OBJECT(current_machine),
+                              OBJECT(current_machine), &error_abort); ==> Add current machine as child of root
+    object_property_add_child(container_get(OBJECT(current_machine), ==> Add sysbus as child of current machine
                                             "/unattached"),
                               "sysbus", OBJECT(sysbus_get_default()),
                               NULL);
@@ -3893,7 +3893,7 @@ void qemu_init(int argc, char **argv, char **envp)
         }
     }
 
-    cpu_exec_init_all();
+    cpu_exec_init_all(); ==> Initialize CPU execution environment like io memory, memory map.
 
     if (machine_class->hw_version) {
         qemu_set_hw_version(machine_class->hw_version);

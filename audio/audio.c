@@ -62,7 +62,8 @@ const char *audio_prio_list[] = {
 static QLIST_HEAD(, audio_driver) audio_drivers;
 static AudiodevListHead audiodevs = QSIMPLEQ_HEAD_INITIALIZER(audiodevs);
 
-void audio_driver_register(audio_driver *drv)
+void audio_driver_register(audio_driver *drv) ==> Provides audio driver register api,
+                                              ==> All drivers are added into the list
 {
     QLIST_INSERT_HEAD(&audio_drivers, drv, next);
 }
