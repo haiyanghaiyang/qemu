@@ -750,9 +750,9 @@ int main(int argc, char **argv)
     error_init(argv[0]);
     module_call_init(MODULE_INIT_TRACE);
     qemu_init_cpu_list();
-    module_call_init(MODULE_INIT_QOM);
+    module_call_init(MODULE_INIT_QOM); ==> Call all QOM type initialization functions
 
-    envlist = envlist_create();
+    envlist = envlist_create(); ==> Create env list
 
     /* add current environment into the list */
     for (wrk = environ; *wrk != NULL; wrk++) {

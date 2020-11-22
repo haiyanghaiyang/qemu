@@ -4025,6 +4025,8 @@ void qemu_init(int argc, char **argv, char **envp)
         default_vga = 0;
     }
 
+    ==> Initialize display
+
     if (is_daemonized()) {
         if (!preconfig_exit_requested) {
             error_report("'preconfig' and 'daemonize' options are "
@@ -4120,7 +4122,7 @@ void qemu_init(int argc, char **argv, char **envp)
                       user_creatable_add_opts_foreach,
                       object_create_initial, &error_fatal);
 
-    qemu_opts_foreach(qemu_find_opts("chardev"),
+    qemu_opts_foreach(qemu_find_opts("chardev"), ==> Init character devices
                       chardev_init_func, NULL, &error_fatal);
     /* now chardevs have been created we may have semihosting to connect */
     qemu_semihosting_connect_chardevs();
@@ -4135,7 +4137,7 @@ void qemu_init(int argc, char **argv, char **envp)
      * machine_set_property(), so machine properties can refer to
      * them.
      */
-    configure_blockdev(&bdo_queue, machine_class, snapshot);
+    configure_blockdev(&bdo_queue, machine_class, snapshot); ==> Configure block devices
 
     machine_opts = qemu_get_machine_opts();
     qemu_opt_foreach(machine_opts, machine_set_property, current_machine,
@@ -4230,7 +4232,7 @@ void qemu_init(int argc, char **argv, char **envp)
     }
 
     /* spice needs the timers to be initialized by this point */
-    qemu_spice_init();
+    qemu_spice_init(); ==> TODO: What is spice?
 
     cpu_ticks_init();
 
@@ -4251,7 +4253,7 @@ void qemu_init(int argc, char **argv, char **envp)
                       user_creatable_add_opts_foreach,
                       object_create_delayed, &error_fatal);
 
-    tpm_init();
+    tpm_init(); ==> TODO: TPM?
 
     blk_mig_init();
     ram_mig_init();
@@ -4340,10 +4342,10 @@ void qemu_init(int argc, char **argv, char **envp)
     /* do monitor/qmp handling at preconfig state if requested */
     qemu_main_loop();
 
-    audio_init_audiodevs();
+    audio_init_audiodevs(); ==> Initialize audio devices
 
     /* from here on runstate is RUN_STATE_PRELAUNCH */
-    machine_run_board_init(current_machine);
+    machine_run_board_init(current_machine); ==> board init?
 
     realtime_init();
 
@@ -4467,7 +4469,7 @@ void qemu_init(int argc, char **argv, char **envp)
             exit(1);
         }
     } else if (autostart) {
-        vm_start();
+        vm_start(); ==> Start virtual machine
     }
 
     accel_setup_post(current_machine);

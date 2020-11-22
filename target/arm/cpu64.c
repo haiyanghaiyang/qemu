@@ -218,7 +218,7 @@ static void aarch64_a72_initfn(Object *obj)
     cpu->midr = 0x410fd083;
     cpu->revidr = 0x00000000;
     cpu->reset_fpsid = 0x41034080;
-    cpu->isar.mvfr0 = 0x10110222;
+    cpu->isar.mvfr0 = 0x10110222; ==> Set default register value
     cpu->isar.mvfr1 = 0x12111111;
     cpu->isar.mvfr2 = 0x00000043;
     cpu->ctr = 0x8444c004;

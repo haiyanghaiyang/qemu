@@ -86,7 +86,7 @@
     uint32_t d;                                                           \
     d = deposit32((storage), R_ ## reg ## _ ## field ## _SHIFT,           \
                   R_ ## reg ## _ ## field ## _LENGTH, v.v);               \
-    d; })
+    d; }) ==> X = FIELD_DP32(...) get d assigned to X?
 #define FIELD_DP64(storage, reg, field, val) ({                           \
     struct {                                                              \
         unsigned int v:R_ ## reg ## _ ## field ## _LENGTH;                \

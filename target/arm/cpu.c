@@ -2699,7 +2699,7 @@ struct ARMCPUInfo {
     void (*class_init)(ObjectClass *oc, void *data);
 };
 
-static const ARMCPUInfo arm_cpus[] = {
+static const ARMCPUInfo arm_cpus[] = { ==> Define cpu architecture and link to related features
 #if !defined(CONFIG_USER_ONLY) || !defined(TARGET_AARCH64)
     { .name = "arm926",      .initfn = arm926_initfn },
     { .name = "arm946",      .initfn = arm946_initfn },

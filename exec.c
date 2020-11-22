@@ -94,7 +94,7 @@ AddressSpace address_space_memory;
 static MemoryRegion io_mem_unassigned;
 #endif
 
-CPUTailQ cpus = QTAILQ_HEAD_INITIALIZER(cpus);
+CPUTailQ cpus = QTAILQ_HEAD_INITIALIZER(cpus); ==> All CPU list
 
 /* current CPU in the current thread. It is only valid inside
    cpu_exec() */

@@ -32,7 +32,7 @@ typedef struct ModuleEntry
 
 typedef QTAILQ_HEAD(, ModuleEntry) ModuleTypeList;
 
-static ModuleTypeList init_type_list[MODULE_INIT_MAX];
+static ModuleTypeList init_type_list[MODULE_INIT_MAX]; ==> For each type, there is a list
 static bool modules_init_done[MODULE_INIT_MAX];
 
 static ModuleTypeList dso_init_list;
@@ -74,7 +74,7 @@ void register_module_init(void (*fn)(void), module_init_type type)
 
     l = find_type(type);
 
-    QTAILQ_INSERT_TAIL(l, e, node);
+    QTAILQ_INSERT_TAIL(l, e, node); ==> Add the init function at end of the list for the type
 }
 
 void register_dso_module_init(void (*fn)(void), module_init_type type)
