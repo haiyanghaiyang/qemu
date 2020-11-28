@@ -1757,7 +1757,7 @@ static void qemu_cpu_kick_thread(CPUState *cpu)
         return;
     }
     cpu->thread_kicked = true;
-    err = pthread_kill(cpu->thread->thread, SIG_IPI);
+    err = pthread_kill(cpu->thread->thread, SIG_IPI); ==> send IPI signal to cpu thread to let it exit
     if (err && err != ESRCH) {
         fprintf(stderr, "qemu:%s: %s", __func__, strerror(err));
         exit(1);

@@ -366,7 +366,7 @@ static int kvm_get_vcpu(KVMState *s, unsigned long vcpu_id)
 {
     struct KVMParkedVcpu *cpu;
 
-    QLIST_FOREACH(cpu, &s->kvm_parked_vcpus, node) {
+    QLIST_FOREACH(cpu, &s->kvm_parked_vcpus, node) { ==> Return vcpu if it is found
         if (cpu->vcpu_id == vcpu_id) {
             int kvm_fd;
 
@@ -377,7 +377,7 @@ static int kvm_get_vcpu(KVMState *s, unsigned long vcpu_id)
         }
     }
 
-    return kvm_vm_ioctl(s, KVM_CREATE_VCPU, (void *)vcpu_id);
+    return kvm_vm_ioctl(s, KVM_CREATE_VCPU, (void *)vcpu_id); ==> Create vcpu if it is not found
 }
 
 int kvm_init_vcpu(CPUState *cpu)
@@ -406,7 +406,7 @@ int kvm_init_vcpu(CPUState *cpu)
     }
 
     cpu->kvm_run = mmap(NULL, mmap_size, PROT_READ | PROT_WRITE, MAP_SHARED,
-                        cpu->kvm_fd, 0);
+                        cpu->kvm_fd, 0); ==> Create shared memory data structure with kernel
     if (cpu->kvm_run == MAP_FAILED) {
         ret = -errno;
         DPRINTF("mmap'ing vcpu state failed\n");
